@@ -1,7 +1,7 @@
 # whisper_cpp_ros
-ROS package for whisper.cpp
+## ROS package for whisper.cpp
 
-- Setup package
+- ### Setup package
 ```bash
 # Clone repository
 cd ~catkin_ws/src
@@ -21,33 +21,33 @@ wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-bas
 wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin -O ./ggml-base.bin # works with multiple languages
 ```
 
-- Nodes
-    - VAD node
-        - Program description
+- ### Nodes
+    - #### VAD node
+        - ##### Program description
             - Takes input audio frames through ROS
             - Performs Voice Activity Detection using Silero VAD (https://github.com/snakers4/silero-vad)
             - Publishes voice clip
-        - Subscribers
+        - ##### Subscribers
             - /audio (``audio_common_msgs/AudioData``)
                 - Designed to receive audio from microphone, tipically with audio_capture (http://wiki.ros.org/audio_capture)
             - /audio_info (``audio_common_msgs/AudioInfo``)
                 - Gets audio info (sample rate, channels, etc)
-        - Publishers
+        - ##### Publishers
             - /audio/voice (``audio_common_msgs/AudioData``)
                 - Publishes audio clip containing voice
-        - How to run
+        - ##### How to run
             ```bash
             roslaunch whisper_cpp_ros audio_capture.launch
             roslaunch whisper_cpp_ros vad.launch
             ```
 
-    - Whisper node
-        - Program description
+    - #### Whisper node
+        - ##### Program description
             - Uses whisper.cpp to perform speech recognition
-        - Subscribers
+        - ##### Subscribers
             - /audio/voice (``audio_common_msgs/AudioData``)
                 - Gets wave audio and then runs the whisper.cpp model for it
-        - How to run
+        - ##### How to run
         ```bash
         roslaunch whisper_cpp_ros whisper.launch
         ```
