@@ -22,31 +22,31 @@
 
 - ### Nodes
     - #### vad.py
-        - ##### Program description
+        - Program description
             - Takes input audio frames through ROS
             - Performs Voice Activity Detection using Silero VAD (https://github.com/snakers4/silero-vad)
             - Publishes voice clip
-        - ##### Subscribers
+        - Subscribers
             - /audio (``audio_common_msgs/AudioData``)
                 - Designed to receive audio from microphone, tipically with audio_capture (http://wiki.ros.org/audio_capture)
             - /audio_info (``audio_common_msgs/AudioInfo``)
                 - Gets audio info (sample rate, channels, etc)
-        - ##### Publishers
+        - Publishers
             - /audio/voice (``audio_common_msgs/AudioData``)
                 - Publishes audio clip containing voice
-        - ##### How to run
+        - How to run
             ```bash
             roslaunch whisper_cpp_ros audio_capture.launch
             roslaunch whisper_cpp_ros vad.launch
             ```
 
     - #### whisper_node.cpp
-        - ##### Program description
+        - Program description
             - Uses whisper.cpp to perform speech recognition
-        - ##### Subscribers
+        - Subscribers
             - /audio/voice (``audio_common_msgs/AudioData``)
                 - Gets wave audio and then runs the whisper.cpp model for it
-        - ##### How to run
+        - How to run
         ```bash
         roslaunch whisper_cpp_ros whisper.launch
         ```
