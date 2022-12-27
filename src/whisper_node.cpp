@@ -15,20 +15,20 @@
 
 typedef struct parameters {
     // Whisper parameters
-    int32_t n_threads    = std::min(4, (int32_t) std::thread::hardware_concurrency());
-    int32_t n_processors = 1;
-    int32_t offset_t_ms  = 0;
-    int32_t duration_ms  = 0;
-    int32_t max_context  = -1;
-    int32_t max_len      = 60;
-    float word_thold = 0.01f;
-    bool speed_up       = false;
-    bool translate      = false;
-    bool print_special  = false;
-    bool print_progress = false;
-    bool no_timestamps  = false;
-    std::string language = "en";
-    std::string model    = "ggml-base.bin";
+    int32_t n_threads       = std::min(4, (int32_t) std::thread::hardware_concurrency());
+    int32_t n_processors    = 1;
+    int32_t offset_t_ms     = 0;
+    int32_t duration_ms     = 0;
+    int32_t max_context     = -1;
+    int32_t max_len         = 60;
+    float word_thold        = 0.01f;
+    bool speed_up           = true;
+    bool translate          = false;
+    bool print_special      = false;
+    bool print_progress     = false;
+    bool no_timestamps      = false;
+    std::string language    = "en";
+    std::string model       = ros::package::getPath("whisper_cpp_ros") + "/models/ggml-base.bin";
 
     // Other parameters
     bool print_timings = false;
@@ -45,7 +45,7 @@ class WhisperNode
 
     // ROS
     ros::NodeHandle nh;
-    ros::Subscriber sub_audio_data = nh.subscribe("/voice/stt/audio_preprocessed", 10, &WhisperNode::CallbackAudioData, this);
+    ros::Subscriber sub_audio_data = nh.subscribe("/audio/voice", 10, &WhisperNode::CallbackAudioData, this);
 
     public:
         // Constructor
@@ -64,8 +64,20 @@ class WhisperNode
         void InitParams()
         {
             ROS_INFO("[WHISPER] Initializing parameters");
-            std::string package_path = ros::package::getPath("whisper_cpp_ros");
-            nh.param("model", params.model, package_path + "/whisper.cpp/models/" + params.model);
+            nh.param("offset_t_ms", params.offset_t_ms);
+            nh.param("duration_ms", params.duration_ms);
+            nh.param("max_context", params.max_context);
+            nh.param("max_len", params.max_len);
+            nh.param("word_thold", params.word_thold);
+            nh.param("speed_up", params.speed_up);
+            nh.param("translate", params.translate);
+            nh.param("print_special", params.print_special);
+            nh.param("print_progress", params.print_progress);
+            nh.param("no_timestamps", params.no_timestamps);
+            nh.param("language", params.language);
+            nh.param("model", params.model);
+            nh.param("print_timings", params.print_timings);
+            nh.param("show_result", params.show_result);
         }
 
         void InitWhisper()
@@ -99,16 +111,13 @@ class WhisperNode
             ROS_INFO("[WHISPER] dr_wav loading wav from memory");
             drwav wav;
 
-            // if (drwav_init_file(&wav, "/home/driver/apollo_ws/src/utbots_voice/utbots_voice/resources/audios/tmp/raw_mic.wav", NULL) == false)
+            ROS_INFO("[WHISPER] wav.channels: %d, wav.sampleRate: %d, wav.bitsPerSample: %d",
+                wav.channels, wav.sampleRate, wav.bitsPerSample);
+
+            // Load wav from memory
+            // if (drwav_init_file(&wav, "/home/driver/apollo_ws/src/whisper_cpp_ros/src/test.wav", nullptr) == false)
             if (drwav_init_memory(&wav, data, dataSize, NULL) == false)
                 ROS_INFO("[WHISPER] dr_wav failed to init wav");
-
-            if (wav.channels != 1 && wav.channels != 2)
-                ROS_INFO("[WHISPER] WAV must be mono or stereo\n");
-            if (wav.sampleRate != WHISPER_SAMPLE_RATE)
-                ROS_INFO("[WHISPER] WAV must be 16 kHz\n");
-            if (wav.bitsPerSample != 16)
-                ROS_INFO("[WHISPER] WAV must be 16-bit\n");
 
             const uint64_t n = wav.totalPCMFrameCount;
 

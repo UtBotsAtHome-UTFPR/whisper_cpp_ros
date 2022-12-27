@@ -1,0 +1,20 @@
+<launch>
+
+    <node name="whisper" pkg="whisper_cpp_ros" type="whisper_node" output="screen">
+        <param name = "offset_t_ms"     value = "0" />
+        <param name = "duration_ms"     value = "0" />
+        <param name = "max_context"     value = "-1" />
+        <param name = "max_len"         value = "60" />
+        <param name = "word_thold"      value = "0.01f" />
+        <param name = "speed_up"        value = "true" />
+        <param name = "translate"       value = "false" />
+        <param name = "print_special"   value = "false" />
+        <param name = "print_progress"  value = "false" />
+        <param name = "no_timestamps"   value = "false" />
+        <param name = "language"        value = "en" />
+        <param name = "model"           value = "$(find whisper_cpp_ros)/models/ggml-base.bin" />
+        <param name = "print_timings"   value = "false" />
+        <param name = "show_result"     value = "true" />
+    </node>
+
+</launch>

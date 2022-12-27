@@ -1,0 +1,14 @@
+<launch>
+    <arg name="device" default="" /> <!-- To list input devices: $ arecord -l -->
+    <arg name="format" default="wave" /> <!-- mp3, wave -->
+
+    <node name="audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+        <param name = "bitrate"         value="16" />
+        <param name = "device"          value="$(arg device)" />
+        <param name = "channels"        value="1" />
+        <param name = "sample_rate"     value="16000" />
+        <param name = "sample_format"   value="S16LE" />
+        <param name = "format"          value="$(arg format)" />
+    </node>
+
+</launch>

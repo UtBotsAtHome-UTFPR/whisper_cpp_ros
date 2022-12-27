@@ -1,0 +1,9 @@
+<launch>
+
+    <node name="vad" pkg="whisper_cpp_ros" type="vad_node.py" output="screen">
+        <param name = "acceptable_vad_confidence" value="0.75" />
+        <param name = "speech_offset"             value="2" />
+        <param name = "use_noise_suppresion"      value="false" />
+    </node>
+
+</launch>
