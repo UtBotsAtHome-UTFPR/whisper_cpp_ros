@@ -1,5 +1,4 @@
-# whisper_cpp_ros
-## ROS package for whisper.cpp
+# whisper_cpp_ros: ROS package for whisper.cpp
 
 - ### Setup package
 ```bash
