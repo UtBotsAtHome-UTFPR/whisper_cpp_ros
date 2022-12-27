@@ -1,6 +1,6 @@
 # whisper_cpp_ros: ROS package for whisper.cpp
 
-- ### Setup package!
+- ### Setup package
     ```bash
     # Clone repository
     cd ~catkin_ws/src
@@ -17,7 +17,7 @@
     mkdir models/
     cd models/
     wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin -O ./ggml-base.en.bin # english only
-    wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin -O ./ggml-base.bin # works with multiple languages
+    wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin -O ./ggml-base.bin # works with multiple languages!
     ```
 
 - ### Nodes
