@@ -1,6 +1,6 @@
 # whisper_cpp_ros: ROS package for whisper.cpp
 
-- ### Setup package
+- ### Setup package!
     ```bash
     # Clone repository
     cd ~catkin_ws/src
