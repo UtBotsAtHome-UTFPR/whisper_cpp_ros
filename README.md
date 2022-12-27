@@ -47,6 +47,6 @@
             - /audio/voice (``audio_common_msgs/AudioData``)
                 - Gets wave audio and then runs the whisper.cpp model for it
         - How to run
-        ```bash
-        roslaunch whisper_cpp_ros whisper.launch
-        ```
+            ```bash
+            roslaunch whisper_cpp_ros whisper.launch
+            ```
