@@ -1,24 +1,24 @@
 # whisper_cpp_ros: ROS package for whisper.cpp
 
 - ### Setup package
-```bash
-# Clone repository
-cd ~catkin_ws/src
-git clone --recurse-submodules https://github.com/UtBotsAtHome-UTFPR/whisper_cpp_ros.git
+    ```bash
+    # Clone repository
+    cd ~catkin_ws/src
+    git clone --recurse-submodules https://github.com/UtBotsAtHome-UTFPR/whisper_cpp_ros.git
 
-# Compile
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws
-catkin_make
-source devel/setup.bash
+    # Compile
+    mkdir -p ~/catkin_ws/src
+    cd ~/catkin_ws
+    catkin_make
+    source devel/setup.bash
 
-# Download models
-roscd whisper_cpp_ros
-mkdir models/
-cd models/
-wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin -O ./ggml-base.en.bin # english only
-wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin -O ./ggml-base.bin # works with multiple languages
-```
+    # Download models
+    roscd whisper_cpp_ros
+    mkdir models/
+    cd models/
+    wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin -O ./ggml-base.en.bin # english only
+    wget https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin -O ./ggml-base.bin # works with multiple languages
+    ```
 
 - ### Nodes
     - #### VAD node
