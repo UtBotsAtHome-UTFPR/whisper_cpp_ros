@@ -21,7 +21,7 @@
     ```
 
 - ### Nodes
-    - #### VAD node
+    - #### vad.py
         - ##### Program description
             - Takes input audio frames through ROS
             - Performs Voice Activity Detection using Silero VAD (https://github.com/snakers4/silero-vad)
@@ -40,7 +40,7 @@
             roslaunch whisper_cpp_ros vad.launch
             ```
 
-    - #### Whisper node
+    - #### whisper_node.cpp
         - ##### Program description
             - Uses whisper.cpp to perform speech recognition
         - ##### Subscribers
